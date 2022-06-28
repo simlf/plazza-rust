@@ -33,16 +33,12 @@ enum PizzaType {
 
 impl PizzaType {
     fn parse(input: &str) -> Result<Self> {
-        if input.contains("regina") {
-            Ok(PizzaType::Regina)
-        } else if input.contains("margarita") {
-            Ok(PizzaType::Margarita)
-        } else if input.contains("americana") {
-            Ok(PizzaType::Americana)
-        } else if input.contains("fantasia") {
-            Ok(PizzaType::Fantasia)
-        } else {
-            Err(anyhow::anyhow!("Unknown pizza type"))
+        match input {
+            "regina" => Ok(PizzaType::Regina),
+            "margarita" => Ok(PizzaType::Margarita),
+            "americana" => Ok(PizzaType::Americana),
+            "fantasia" => Ok(PizzaType::Fantasia),
+            _ => Err(anyhow::anyhow!("Unknown pizza type"))
         }
     }
 
@@ -59,19 +55,13 @@ enum PizzaSize {
 
 impl PizzaSize {
     fn parse(input: &str) -> Result<Self> {
-        if input.contains("S") {
-            Ok(PizzaSize::S)
-        } else if input.contains("M") {
-            Ok(PizzaSize::M)
-        } else if input.contains("XXL") {
-            Ok(PizzaSize::XXL)
-        } else if input.contains("XL") {
-            Ok(PizzaSize::XL)
-        } else if input.contains("L") {
-            Ok(PizzaSize::L)
-        } else {
-             Err(anyhow::anyhow!("Unknown pizza size"))
+        match input {
+            "S" => Ok(PizzaSize::S),
+            "M" => Ok(PizzaSize::M),
+            "L" => Ok(PizzaSize::L),
+            "XL" => Ok(PizzaSize::XL),
+            "XXL" => Ok(PizzaSize::XXL),
+            _ => Err(anyhow::anyhow!("Unknown pizza size"))
         }
     }
-
 }
