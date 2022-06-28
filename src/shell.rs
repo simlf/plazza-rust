@@ -51,17 +51,33 @@ impl Shell {
 
     fn order_pizza(&mut self, command: String) {
         let mut pizza_number = self.check_pizza_number(command.to_string());
+
         while pizza_number >= 1 {
-            let pizza: Pizza = Pizza::parse(&command).unwrap();
-            self.pizzas.push_back(pizza);
-            pizza_number -= 1;
+            let pizza = Pizza::parse(&command);
+
+            match pizza {
+                Ok(pizza) => {
+                    self.pizzas.push_back(pizza);
+                    pizza_number -= 1;
+                }
+                Err(e) => {
+                    println!("{} in '{}' command", e, command);
+                    break;
+                }
+            }
         }
     }
 
     fn check_pizza_number(&self, number: String) -> usize {
         let iter: String = number.split_whitespace().last().unwrap().split("x").collect();
 
-        iter.parse().unwrap()
+        match iter.parse() {
+            Ok(number) => number,
+            Err(_) =>{
+                println!("Error: Invalid pizza number");
+                0
+            }
+        }
     }
 }
 

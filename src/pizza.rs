@@ -11,9 +11,8 @@ impl Pizza {
         let mut iter = input.split_whitespace();
         let r#type = iter.next().ok_or(anyhow::anyhow!("No pizza type"))?;
         let size = iter.next().ok_or(anyhow::anyhow!("No pizza size"))?;
-
-        let r#type = PizzaType::parse(r#type).unwrap();
-        let size = PizzaSize::parse(size).unwrap();
+        let r#type = PizzaType::parse(r#type)?;
+        let size = PizzaSize::parse(size)?;
 
         println!("{:?}, {:?}", r#type, size);
         Ok(Pizza {
