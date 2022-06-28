@@ -11,19 +11,10 @@ pub struct Shell {
 }
 
 impl Shell {
-    fn prompt(&self, name:&str) -> String {
-        let mut line = String::new();
-
-        print!("{}", name);
-        std::io::stdout().flush().unwrap();
-        std::io::stdin().read_line(&mut line).expect("Error: Could not read a line");
-
-        line.trim().to_string()
-    }
 
     pub fn run(&mut self) {
         loop {
-            let input = self.prompt("> ");
+            let input = self.prompt();
             match input.as_str() {
                 "status" => println!("Status"),
                 _ => {
@@ -31,6 +22,17 @@ impl Shell {
                 }
             }
         }
+    }
+    // rust make an interactive shell
+    fn prompt(&self) -> String {
+        let mut line = String::new();
+
+        print!("> ");
+        std::io::stdout().flush().unwrap();
+        // stdout().
+        std::io::stdin().read_line(&mut line).expect("Error: Could not read a line");
+
+        line.trim().to_string()
     }
 
     fn check_orders(&mut self, input: String) {
